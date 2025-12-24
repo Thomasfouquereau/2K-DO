@@ -52,6 +52,8 @@ body{
     font-size: 10vw;
     font-weight: 700;
     font-style: italic;
+    /* Effet de pulsation */
+    animation: pulse-cta 1.8s ease-in-out infinite;
 }
 
 #actionButton1 {
@@ -146,6 +148,8 @@ body{
     align-items: center;
     justify-content: center;
     user-select: none;
+    position: relative; /* pour positionner l'icône au-dessus */
+    overflow: visible;
 }
 
 .cell img {
@@ -166,6 +170,24 @@ body{
 .cell.active {
     background: #ffe5e5;
     box-shadow: 0 0 0 1vw #fff inset, 0 0 24px rgba(227, 36, 36, 0.6);
+}
+
+/* Icône kado par-dessus (dessus) de chaque cellule */
+.cell::before{
+    content: "";
+    position: absolute;
+    inset: 0; /* couvre toute la cellule */
+    background-image: url("./Assets/kado.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    pointer-events: none;
+    z-index: 2; /* au-dessus de l'image de la cellule */
+    opacity: 1; /* pleine opacité par défaut */
+    width: 130%;
+    height: 130%;
+    top: -25%;
+    left: -15%;
 }
 
 .status-bar {
@@ -297,4 +319,44 @@ body{
         max-width: 90%;
         font-size: 5vw;
     }
+}
+
+/* Animation pulsation pour le bouton Jouer */
+@keyframes pulse-cta {
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 0 0 rgba(227, 36, 36, 0.45);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.06);
+        box-shadow: 0 0 0 1.2vw rgba(227, 36, 36, 0);
+    }
+}
+
+/* Animation de secousse des cellules */
+@keyframes cell-shake {
+    0%   { transform: translate(0) rotate(0); }
+    15%  { transform: translate(-2px, 0) rotate(-1deg); }
+    30%  { transform: translate(3px, 0) rotate(1deg); }
+    45%  { transform: translate(-3px, 0) rotate(0deg); }
+    60%  { transform: translate(2px, 0) rotate(1deg); }
+    75%  { transform: translate(-2px, 0) rotate(-1deg); }
+    100% { transform: translate(0) rotate(0); }
+}
+
+/* Classe appliquée temporairement pour la secousse */
+.cell.shake {
+    animation: cell-shake 0.8s ease-in-out;
+    will-change: transform;
+}
+
+/* Pendant la secousse, rendre l'overlay plus transparent */
+.cell.shake::before {
+    opacity: 0.35;
+    transition: opacity 0.2s ease;
+}
+
+/* Respect des préférences d’accessibilité */
+@media (prefers-reduced-motion: reduce) {
+    #actionButton { animation: none; }
 }

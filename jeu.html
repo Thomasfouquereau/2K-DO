@@ -27,7 +27,7 @@
     <!-- Modale de confirmation -->
     <div id="modal" class="modal-overlay" hidden>
         <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-            <h2 id="modalTitle">Votre sélection</h2>
+            <h2 id="modalTitle">Ton super kdo</h2>
             <img id="modalImage" alt="Sélection" />
             <div class="modal-actions">
                 <button id="acceptBtn" class="modal-btn accept">Accepter</button>
@@ -39,7 +39,7 @@
     <!-- Modale de résultat -->
     <div id="resultModal" class="modal-overlay" hidden>
         <div class="modal-content resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
-            <h2 id="resultTitle">Résultat</h2>
+            <h2 id="resultTitle">Ton super kdo</h2>
             <div class="result-body">
                 <img id="resultImage" alt="Résultat" />
                 <div id="resultDialog" class="dialog dialogGauche">
@@ -63,27 +63,27 @@
             switch (key) {
                                 case 'papa':
                     return [
-                        { nom: 'Reverse', image: './Assets/imageKDO/reverse.png', chance: 0.10, kDoB1:false, message: "revers c'est à toi de m'offrir un cadeau maintenant" },//
-                        { nom: 'calendrier chien caca', image: './Assets/imageKDO/calendrier chien caca.avif', chance: 0.15, kDoB1:false, message: "ces paysages ne sont-ils pas magnifiques ?" },//
-                        { nom: 'iphon 3gs', image: './Assets/imageKDO/iphon 3gs.avif', chance: 0.10, kDoB1:false, message:'tu vas pouvoir réparer ton ancien iPhone. ah tu n\'en as pas?'  },//
-                        { nom: '20e', image: './Assets/imageKDO/20e.png', chance: 0.10, kDoB1:true, message: "tiens 20 balles en espèces tu pourras t'acheter des bonbons à la boulange" },//
-                        { nom: 'douche spider', image: './Assets/imageKDO/douche spider.jpg', chance: 0.10, kDoB1:false, message:'tiens c\'est un petit doudouche sur Spyder'  },//
-                        { nom: 'cinture', image: './Assets/imageKDO/cinture.jpg', chance: 0.10, kDoB1:true, message: "une ceinture pour tenir tes pantalons et tes outils" },//
-                        { nom: 'casio', image: './Assets/imageKDO/casio.jpg', chance: 0.10, kDoB1:true, message: "une montre pour ne jamais être en retard" },//
-                        { nom: 'casquet', image: './Assets/imageKDO/casquet.avif', chance: 0.10,  kDoB1:false, message: 'une méga casquette pour le maxi soleil' },//
-                        { nom: 'frigo m', image: './Assets/imageKDO/frigo m.avif', chance: 0.10,  kDoB1:false , message: 'heuu j\'ai pas d\'idée'},//
+                        { nom: 'Reverse', image: './Assets/imageKDO/reverse.png', chance: 0.10, kDoB1:false, message: "Revers c'est à toi de m'offrir un cadeau maintenant" },//
+                        { nom: 'calendrier chien caca', image: './Assets/imageKDO/calendrier chien caca.avif', chance: 0.15, kDoB1:false, message: "Ces paysages ne sont-ils pas magnifiques ?" },//
+                        { nom: 'iphon 3gs', image: './Assets/imageKDO/iphon 3gs.avif', chance: 0.10, kDoB1:false, message:'Tu vas pouvoir réparer ton ancien iPhone. ah tu n\'en as pas?'  },//
+                        { nom: '20e', image: './Assets/imageKDO/20e.png', chance: 0.10, kDoB1:true, message: "Tiens 20 balles en espèces tu pourras t'acheter des bonbecs à la boulange" },//
+                        { nom: 'douche spider', image: './Assets/imageKDO/douche spider.jpg', chance: 0.10, kDoB1:false, message:'Tiens c\'est un petit doudouche sur Spyder'  },//
+                        { nom: 'cinture', image: './Assets/imageKDO/cinture.jpg', chance: 0.10, kDoB1:true, message: "Une ceinture pour tenir tes pantalons et tes outils" },//
+                        { nom: 'casio', image: './Assets/imageKDO/casio.jpg', chance: 0.10, kDoB1:true, message: "Une montre pour ne jamais être en retard" },//
+                        { nom: 'casquet', image: './Assets/imageKDO/casquet.avif', chance: 0.10,  kDoB1:false, message: 'Une méga casquette pour le maxi soleil' },//
+                        { nom: 'frigo m', image: './Assets/imageKDO/frigo m.avif', chance: 0.10,  kDoB1:false , message: 'Heuu j\'ai pas d\'idée'},//
                     ];
                 case 'maman':
                     return [
-                        { nom: 'miroir', image: './Assets/imageKDO/miroir.jpg', chance: 0.10, kDoB1:true, message: "miroir miroir tu connais la suite" },//
-                        { nom: 'chat lego', image: './Assets/imageKDO/chatLego.avif', chance: 0.15, kDoB1:false, message:'tiens un petit chat Lego amuse-toi'  },//
-                        { nom: 'Reverse', image: './Assets/imageKDO/reverse.png', chance: 0.10, kDoB1:false, message: "revers c'est à toi de m'offrir un cadeau maintenant" },//
-                        { nom: 'frigo m', image: './Assets/imageKDO/frigo m.avif', chance: 0.10, kDoB1:false , message: 'nouveau frigo ?'},//
-                        { nom: 'gourde Cafe', image: './Assets/imageKDO/gourdecafe.jpg', chance: 0.10, kDoB1:true, message: "une gourde pour ton café" },//
-                        { nom: 'chien clef', image: './Assets/imageKDO/chien clef.avif', chance: 0.10, kDoB1:false, message: "un porte-clé chien trop mignon" },//
-                        { nom: 'gourde', image: './Assets/imageKDO/gourde.jpg', chance: 0.10, kDoB1:true, message: "une gourde pour rester hydraté" },//
-                        { nom: '20e', image: './Assets/imageKDO/20e.png', chance: 0.10, kDoB1:true, message: "tiens 20 balles en espèces tu pourras t'acheter des bonbons à la boulange" },//
-                        { nom: 'iphon 3gs', image: './Assets/imageKDO/iphon 3gs.avif', chance: 0.10,  kDoB1:false, message:'tu vas pouvoir réparer ton ancien iPhone. ah tu n\'en as pas?'  },//
+                        { nom: 'miroir', image: './Assets/imageKDO/miroir.jpg', chance: 0.10, kDoB1:true, message: "Miroir miroir tu connais la suite" },//
+                        { nom: 'chat lego', image: './Assets/imageKDO/chatLego.avif', chance: 0.15, kDoB1:false, message:'Tiens un petit chat Lego amuse-toi'  },//
+                        { nom: 'Reverse', image: './Assets/imageKDO/reverse.png', chance: 0.10, kDoB1:false, message: "Revers c'est à toi de m'offrir un cadeau maintenant" },//
+                        { nom: 'frigo m', image: './Assets/imageKDO/frigo m.avif', chance: 0.10, kDoB1:false , message: 'Nouveau frigo ?'},//
+                        { nom: 'gourde Cafe', image: './Assets/imageKDO/gourdecafe.jpg', chance: 0.10, kDoB1:true, message: "Une gourde pour ton café" },//
+                        { nom: 'chien clef', image: './Assets/imageKDO/chien clef.avif', chance: 0.10, kDoB1:false, message: "Un porte-clé chien trop mignon" },//
+                        { nom: 'gourde', image: './Assets/imageKDO/gourde.jpg', chance: 0.10, kDoB1:true, message: "Une gourde pour rester hydraté" },//
+                        { nom: '20e', image: './Assets/imageKDO/20e.png', chance: 0.10, kDoB1:true, message: "Tiens 20 balles en espèces tu pourras t'acheter des bonbecs à la boulange" },//
+                        { nom: 'iphon 3gs', image: './Assets/imageKDO/iphon 3gs.avif', chance: 0.10,  kDoB1:false, message:'Tu vas pouvoir réparer ton ancien iPhone. ah tu n\'en as pas?'  },//
                     ];
                 default:
                     return [
@@ -269,6 +269,30 @@
 
             spinning = false;
         });
+
+        // Animation de secousse aléatoire toutes les 7s
+        const SHAKE_INTERVAL_MS = 7000; // 7 secondes
+        const SHAKE_DURATION_MS = 800;   // doit correspondre à l'animation CSS
+
+        function triggerRandomCellShake() {
+            if (!cells || cells.length === 0) return;
+            if (spinning) return; // évite de perturber l'animation de roulette
+
+            const index = Math.floor(Math.random() * cells.length);
+            const el = cells[index];
+            if (!el) return;
+
+            // Si déjà en train de secouer, on ignore pour éviter l'empilement
+            if (el.classList.contains('shake')) return;
+
+            el.classList.add('shake');
+            setTimeout(() => {
+                el.classList.remove('shake');
+            }, SHAKE_DURATION_MS);
+        }
+
+        // Démarre l'intervalle de secousse après le rendu de la grille
+        setInterval(triggerRandomCellShake, SHAKE_INTERVAL_MS);
     </script>
 </body>
 
