@@ -1,0 +1,246 @@
+body{
+    background-image: url("../Assets/BG 1KDO 2.png");
+    background-size: cover;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#SantaImage {
+    position: absolute;
+    top: -13vh;
+    left: -15vw;
+    height: 40vh;
+    width: auto;
+    z-index: 950;
+    transform: rotate(-15deg);
+}
+
+#titleImage {
+    position: absolute;
+    top: 20vh;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 13vh;
+    width: auto;
+    z-index: 950;
+}
+#titleImage2 {
+    position: absolute;
+    top: 15vh;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 13vh;
+    width: auto;
+    z-index: 950;
+}
+
+#actionButton {
+    position: absolute;
+    left: 50%;
+    bottom: 15%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    background-color: #E32424;
+    color: white;
+    border: 1.3vw solid #ffffff;
+    border-radius: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    width: 65vw;
+    height: 18vw;
+    font-size: 10vw;
+    font-weight: 700;
+    font-style: italic;
+}
+
+#actionButton1 {
+    font-size: 24px;
+    background-color: #E32424;
+    color: white;
+    border: 1.3vw solid #ffffff;
+    border-radius: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    width: 70vw;
+    height: 20vw;
+    font-size: 8vw;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.button-container {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    z-index: 1000;
+}
+
+#displayImage {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+}
+
+#sapinImage {
+    position: absolute;
+    bottom: 10vh;
+    right: -45vw;
+    height: 55vh;
+    width: auto;
+    z-index: 900;
+}
+
+#sapinImage2 {
+    position: absolute;
+    bottom: 14vh;
+    right: 50%;
+    transform: translateX(52%);
+    height: 70vh;
+    width: auto;
+    z-index: 990;
+}
+
+#lampadaireImage {
+    position: absolute;
+    bottom: 22vh;
+    left: -10vw;
+    height: 25vh;
+    width: auto;
+}
+
+#lampadaireImage2 {
+    position: absolute;
+    bottom: 25vh;
+    left: 25vw;
+    height: 24vh;
+    width: auto;
+}
+
+/* Grille 3×3 pour le jeu */
+.grid {
+    position: absolute;
+    top: 25vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3vw;
+    width: 80vw;
+    max-width: 800px;
+    z-index: 980;
+}
+
+.cell {
+    aspect-ratio: 1 / 1;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1vw solid #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.cell img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    display: block;
+}
+
+.cell.selected {
+    outline: 1vw solid #E32424;
+    outline-offset: -1vw;
+    transform: scale(1.05);
+    transition: transform 160ms ease, outline-color 160ms ease;
+}
+
+/* Cellule active durant la rotation */
+.cell.active {
+    background: #ffe5e5;
+    box-shadow: 0 0 0 1vw #fff inset, 0 0 24px rgba(227, 36, 36, 0.6);
+}
+
+.status-bar {
+    position: absolute;
+    top: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 6vw;
+    z-index: 990;
+    text-align: center;
+    width: 90vw;
+}
+
+/* Modale */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+/* Respecte l'attribut hidden pour masquer la modale */
+.modal-overlay[hidden] {
+    display: none !important;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    width: 80vw;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.modal-content h2 {
+    margin: 0 0 12px 0;
+    font-size: 6vw;
+    color: #E32424;
+}
+
+#modalImage {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.modal-btn {
+    border: 1vw solid #ffffff;
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 5vw;
+    cursor: pointer;
+}
+
+.modal-btn.accept {
+    background-color: #E32424;
+    color: #fff;
+}
+
+.modal-btn.decline {
+    background-color: #aaa;
+    color: #fff;
+}

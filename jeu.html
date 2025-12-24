@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jeu</title>
+    <meta name="description" content="Page du jeu." />
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <img id="SantaImage" src="./Assets/santa.png" alt="Père Noël" />
+    <img id="displayImage" src="./Assets/Rectangle 1.png" alt="sol" />
+
+    <div class="status-bar">
+        <span id="selectedPerson"></span>
+        <span id="result"></span>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <button id="actionButton">
+        Jouer
+    </button>
+
+    <!-- Modale de confirmation -->
+    <div id="modal" class="modal-overlay" hidden>
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <h2 id="modalTitle">Votre sélection</h2>
+            <img id="modalImage" alt="Sélection" />
+            <div class="modal-actions">
+                <button id="acceptBtn" class="modal-btn accept">Accepter</button>
+                <button id="declineBtn" class="modal-btn decline">Refuser</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Récupère le paramètre "person" et l'affiche si présent
+        const params = new URLSearchParams(window.location.search);
+        const person = params.get('person');
+
+        // Items de grille selon la personne sélectionnée
+        function getGridItemsForPerson(p) {
+            const key = (p || '').toLowerCase();
+            switch (key) {
+                case 'papa':
+                    return [
+                        { nom: 'santa', image: './Assets/santa.png', chance: 0.20 },
+                        { nom: 'chad', image: './Assets/gigachad.png', chance: 0.15 },
+                        { nom: 'lampe', image: './Assets/lampadaire.png', chance: 0.10 },
+                        { nom: 'cadeau', image: './Assets/kado.png', chance: 0.10 },
+                        { nom: 'pn', image: './Assets/petitcacanoel.png', chance: 0.10 },
+                        { nom: 'sol', image: './Assets/Rectangle 1.png', chance: 0.10 },
+                        { nom: 'BG', image: './Assets/BG 1KDO 2.png', chance: 0.10 },
+                        { nom: 'sapin', image: './Assets/sapin.png', chance: 0.075 },
+                        { nom: '1kdo', image: './Assets/1kdo 2.png', chance: 0.075 },
+                    ];
+                case 'maman':
+                    return [
+                        { nom: 'cadeau', image: './Assets/kado.png', chance: 0.20 },
+                        { nom: 'sapin', image: './Assets/sapin.png', chance: 0.15 },
+                        { nom: 'BG', image: './Assets/BG 1KDO 2.png', chance: 0.10 },
+                        { nom: 'sol', image: './Assets/Rectangle 1.png', chance: 0.10 },
+                        { nom: 'lampe', image: './Assets/lampadaire.png', chance: 0.10 },
+                        { nom: 'pn', image: './Assets/petitcacanoel.png', chance: 0.10 },
+                        { nom: 'santa', image: './Assets/santa.png', chance: 0.10 },
+                        { nom: 'chad', image: './Assets/gigachad.png', chance: 0.075 },
+                        { nom: '1kdo', image: './Assets/1kdo 2.png', chance: 0.075 },
+                    ];
+                default:
+                    return [
+                        { nom: '1kdo', image: './Assets/1kdo 2.png', chance: 0.05 },
+                        { nom: 'BG', image: './Assets/BG 1KDO 2.png', chance: 0.10 },
+                        { nom: 'chad', image: './Assets/gigachad.png', chance: 0.15 },
+                        { nom: 'cadeau', image: './Assets/kado.png', chance: 0.05 },
+                        { nom: 'lampe', image: './Assets/lampadaire.png', chance: 0.20 },
+                        { nom: 'pn', image: './Assets/petitcacanoel.png', chance: 0.10 },
+                        { nom: 'sol', image: './Assets/Rectangle 1.png', chance: 0.10 },
+                        { nom: 'santa', image: './Assets/santa.png', chance: 0.15 },
+                        { nom: 'sapin', image: './Assets/sapin.png', chance: 0.10 },
+                    ];
+            }
+        }
+        let gridItems = getGridItemsForPerson(person);
+
+        const gridEl = document.getElementById('grid');
+        const resultEl = document.getElementById('result');
+        const playBtn = document.getElementById('actionButton');
+        const selectedPersonEl = document.getElementById('selectedPerson');
+        
+        const modalEl = document.getElementById('modal');
+        const modalImageEl = document.getElementById('modalImage');
+        const acceptBtn = document.getElementById('acceptBtn');
+        const declineBtn = document.getElementById('declineBtn');
+
+        // Génère/régénère la grille 3×3
+        let cells = [];
+        function renderGrid() {
+            gridEl.innerHTML = '';
+            cells = [];
+            gridItems.forEach((item, idx) => {
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                cell.dataset.index = String(idx);
+                const img = document.createElement('img');
+                img.src = item.image;
+                img.alt = item.nom;
+                cell.appendChild(img);
+                gridEl.appendChild(cell);
+                // Ouvre la modale quand une case est sélectionnée manuellement
+                cell.addEventListener('click', () => {
+                    if (spinning) return;
+                    selectCell(idx);
+                    openModal(idx);
+                });
+                cells.push(cell);
+            });
+        }
+        renderGrid();
+
+        // Tirage pondéré par la propriété "chance"
+        function weightedRandomIndex(items) {
+            const total = items.reduce((sum, it) => sum + (it.chance || 0), 0);
+            const r = Math.random() * total;
+            let acc = 0;
+            for (let i = 0; i < items.length; i++) {
+                acc += (items[i].chance || 0);
+                if (r < acc) return i;
+            }
+            return items.length - 1; // fallback si arrondi flottant
+        }
+
+        // Sélection et feedback visuel
+        let currentIndex = null;
+        function selectCell(index) {
+            cells.forEach(c => c.classList.remove('selected'));
+            const chosen = cells[index];
+            if (chosen) {
+                chosen.classList.add('selected');
+                currentIndex = index;
+            }
+        }
+
+        // Animation de roulette: les cases s'allument à tour de rôle puis s'arrêtent sur la bonne
+        let spinning = false;
+        function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        function setActive(index) {
+            cells.forEach(c => c.classList.remove('active'));
+            const el = cells[index];
+            if (el) el.classList.add('active');
+        }
+
+        async function spinTo(index, cycles = 3) {
+            const totalSteps = cycles * cells.length + index; // termine exactement sur l'index visé
+            let step = 0;
+            let activeIdx = -1;
+            let interval = 120; // vitesse de départ
+
+            while (step < totalSteps) {
+                activeIdx = (activeIdx + 1) % cells.length;
+                setActive(activeIdx);
+                step++;
+
+                const remaining = totalSteps - step;
+                // ralentit vers la fin pour l'effet suspense
+                if (remaining <= 6) interval = 300;
+                else if (remaining <= 12) interval = 200;
+
+                await sleep(interval);
+            }
+
+            // Fin: enlève l'état actif et sélectionne la case gagnante
+            cells.forEach(c => c.classList.remove('active'));
+            selectCell(index);
+            openModal(index);
+        }
+
+        function openModal(index) {
+            const item = gridItems[index];
+            if (!item) return;
+            modalImageEl.src = item.image;
+            modalImageEl.alt = item.nom;
+            modalEl.hidden = false;
+        }
+
+        function closeModal() {
+            modalEl.hidden = true;
+        }
+
+        acceptBtn.addEventListener('click', () => {
+            const item = gridItems[currentIndex];
+            if (item && item.lien) {
+                try {
+                    window.open(item.lien, '_blank');
+                } catch (e) {}
+            }
+            closeModal();
+        });
+
+        declineBtn.addEventListener('click', () => {
+            closeModal();
+        });
+
+        // Au clic sur "Jouer": spin pondéré sans décompte
+        playBtn.addEventListener('click', async () => {
+            if (spinning) return;
+            spinning = true;
+
+            resultEl.textContent = '';
+            // ferme la modale si elle est ouverte
+            try { modalEl.hidden = true; } catch (e) {}
+            cells.forEach(c => c.classList.remove('selected', 'active'));
+
+            const idx = weightedRandomIndex(gridItems);
+            await spinTo(idx, 3);
+
+            spinning = false;
+        });
+    </script>
+</body>
+
+</html>

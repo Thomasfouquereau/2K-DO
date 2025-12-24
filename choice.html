@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Choix</title>
+  <meta name="description" content="Page du jeu." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <img id="SantaImage" src="./Assets/santa.png" alt="Père Noël" />
+  <img id="titleImage2" src="./Assets/1kdo 2.png" alt="Titre" />
+  <img id="displayImage" src="./Assets/Rectangle 1.png" alt="sol" />
+  <img id="sapinImage2" src="./Assets/sapin.png" alt="sapin" />
+
+  <div class="button-container">
+    <button id="actionButton1" data-person="Papa" aria-label="Choisir Papa">Papa</button>
+    <button id="actionButton1" data-person="Maman" aria-label="Choisir Maman">Maman</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('#actionButton1').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var person = btn.dataset.person || btn.textContent.trim();
+          window.location.href = 'jeu.html?person=' + encodeURIComponent(person);
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
