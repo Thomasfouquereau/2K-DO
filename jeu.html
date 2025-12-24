@@ -27,11 +27,27 @@
     <!-- Modale de confirmation -->
     <div id="modal" class="modal-overlay" hidden>
         <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-            <h2 id="modalTitle">C ton KDO</h2>
+            <h2 id="modalTitle">Votre sélection</h2>
             <img id="modalImage" alt="Sélection" />
             <div class="modal-actions">
                 <button id="acceptBtn" class="modal-btn accept">Accepter</button>
                 <button id="declineBtn" class="modal-btn decline">Refuser</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale de résultat -->
+    <div id="resultModal" class="modal-overlay" hidden>
+        <div class="modal-content resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+            <h2 id="resultTitle">Résultat</h2>
+            <div class="result-body">
+                <img id="resultImage" alt="Résultat" />
+                <div id="resultDialog" class="dialog dialogGauche">
+                    <p id="resultMessage"></p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="closeResultBtn" class="modal-btn decline">Fermer</button>
             </div>
         </div>
     </div>
@@ -45,29 +61,29 @@
         function getGridItemsForPerson(p) {
             const key = (p || '').toLowerCase();
             switch (key) {
-                case 'papa':
+                                case 'papa':
                     return [
-                        { nom: 'Reverse', image: './Assets/imageKDO/reverse.png', chance: 0.20 },//
-                        { nom: 'calendrier chien caca', image: './Assets/imageKDO/calendrier chien caca.avif', chance: 0.15 },//
-                        { nom: 'iphon 3gs', image: './Assets/imageKDO/iphon 3gs.avif', chance: 0.10 },//
-                        { nom: '20e', image: './Assets/imageKDO/20e.png', chance: 0.10 },//
-                        { nom: 'douche spider', image: './Assets/imageKDO/douche spider.jpg', chance: 0.10 },//
-                        { nom: 'cinture', image: './Assets/imageKDO/cinture.jpg', chance: 0.10 },//
-                        { nom: 'chien clef', image: './Assets/imageKDO/chien clef.avif', chance: 0.10 },//-------
-                        { nom: 'casquet', image: './Assets/imageKDO/casquet.avif', chance: 0.10 },//
-                        { nom: 'frigo m', image: './Assets/imageKDO/frigo m.avif', chance: 0.10 },//
+                        { nom: 'Reverse', image: './Assets/imageKDO/reverse.png', chance: 0.10, kDoB1:false, message: "revers c'est à toi de m'offrir un cadeau maintenant" },//
+                        { nom: 'calendrier chien caca', image: './Assets/imageKDO/calendrier chien caca.avif', chance: 0.15, kDoB1:false, message: "ces paysages ne sont-ils pas magnifiques ?" },//
+                        { nom: 'iphon 3gs', image: './Assets/imageKDO/iphon 3gs.avif', chance: 0.10, kDoB1:false, message:'tu vas pouvoir réparer ton ancien iPhone. ah tu n\'en as pas?'  },//
+                        { nom: '20e', image: './Assets/imageKDO/20e.png', chance: 0.10, kDoB1:true, message: "tiens 20 balles en espèces tu pourras t'acheter des bonbons à la boulange" },//
+                        { nom: 'douche spider', image: './Assets/imageKDO/douche spider.jpg', chance: 0.10, kDoB1:false, message:'tiens c\'est un petit doudouche sur Spyder'  },//
+                        { nom: 'cinture', image: './Assets/imageKDO/cinture.jpg', chance: 0.10, kDoB1:true, message: "une ceinture pour tenir tes pantalons et tes outils" },//
+                        { nom: 'casio', image: './Assets/imageKDO/casio.jpg', chance: 0.10, kDoB1:true, message: "une montre pour ne jamais être en retard" },//
+                        { nom: 'casquet', image: './Assets/imageKDO/casquet.avif', chance: 0.10,  kDoB1:false, message: 'une méga casquette pour le maxi soleil' },//
+                        { nom: 'frigo m', image: './Assets/imageKDO/frigo m.avif', chance: 0.10,  kDoB1:false , message: 'heuu j\'ai pas d\'idée'},//
                     ];
                 case 'maman':
                     return [
-                        { nom: 'miroir', image: './Assets/imageKDO/miroir.jpg', chance: 0.20 },//
-                        { nom: 'chat lego', image: './Assets/imageKDO/chatLego.avif', chance: 0.15 },//
-                        { nom: 'Reverse', image: './Assets/imageKDO/reverse.png', chance: 0.20 },//
-                        { nom: 'frigo m', image: './Assets/imageKDO/frigo m.avif', chance: 0.10 },//
-                        { nom: 'gourde Cafe', image: './Assets/imageKDO/gourdecafe.jpg', chance: 0.10 },//
-                        { nom: 'chien clef', image: './Assets/imageKDO/chien clef.avif', chance: 0.10 },//
-                        { nom: 'gourde', image: './Assets/imageKDO/gourde.jpg', chance: 0.10 },//
-                        { nom: '20e', image: './Assets/imageKDO/20e.png', chance: 0.10 },//
-                        { nom: 'iphon 3gs', image: './Assets/imageKDO/iphon 3gs.avif', chance: 0.10 },//
+                        { nom: 'miroir', image: './Assets/imageKDO/miroir.jpg', chance: 0.10, kDoB1:true, message: "miroir miroir tu connais la suite" },//
+                        { nom: 'chat lego', image: './Assets/imageKDO/chatLego.avif', chance: 0.15, kDoB1:false, message:'tiens un petit chat Lego amuse-toi'  },//
+                        { nom: 'Reverse', image: './Assets/imageKDO/reverse.png', chance: 0.10, kDoB1:false, message: "revers c'est à toi de m'offrir un cadeau maintenant" },//
+                        { nom: 'frigo m', image: './Assets/imageKDO/frigo m.avif', chance: 0.10, kDoB1:false , message: 'nouveau frigo ?'},//
+                        { nom: 'gourde Cafe', image: './Assets/imageKDO/gourdecafe.jpg', chance: 0.10, kDoB1:true, message: "une gourde pour ton café" },//
+                        { nom: 'chien clef', image: './Assets/imageKDO/chien clef.avif', chance: 0.10, kDoB1:false, message: "un porte-clé chien trop mignon" },//
+                        { nom: 'gourde', image: './Assets/imageKDO/gourde.jpg', chance: 0.10, kDoB1:true, message: "une gourde pour rester hydraté" },//
+                        { nom: '20e', image: './Assets/imageKDO/20e.png', chance: 0.10, kDoB1:true, message: "tiens 20 balles en espèces tu pourras t'acheter des bonbons à la boulange" },//
+                        { nom: 'iphon 3gs', image: './Assets/imageKDO/iphon 3gs.avif', chance: 0.10,  kDoB1:false, message:'tu vas pouvoir réparer ton ancien iPhone. ah tu n\'en as pas?'  },//
                     ];
                 default:
                     return [
@@ -94,6 +110,13 @@
         const modalImageEl = document.getElementById('modalImage');
         const acceptBtn = document.getElementById('acceptBtn');
         const declineBtn = document.getElementById('declineBtn');
+
+        // Deuxième modale (résultat)
+        const resultModalEl = document.getElementById('resultModal');
+        const resultImageEl = document.getElementById('resultImage');
+        const resultDialogEl = document.getElementById('resultDialog');
+        const resultMessageEl = document.getElementById('resultMessage');
+        const closeResultBtn = document.getElementById('closeResultBtn');
 
         // Génère/régénère la grille 3×3
         let cells = [];
@@ -190,18 +213,45 @@
             modalEl.hidden = true;
         }
 
+        function openResultModal(forItem) {
+            // Choix de l'image et orientation du dialogue selon kDoB1
+            const isGood = !!forItem?.kDoB1;
+            const imgPath = isGood ? './Assets/gigachad.png' : './Assets/petitcacanoel.png';
+            const message = forItem?.message || (isGood ? 'Bravo !' : 'Oups...');
+
+            resultImageEl.src = imgPath;
+            resultImageEl.alt = isGood ? 'Gigachad' : 'Petit Caca Noël';
+
+            resultMessageEl.textContent = message;
+
+            // Positionne la bulle de dialogue
+            resultDialogEl.classList.remove('dialogGauche', 'dialogDroit');
+            resultDialogEl.classList.add(isGood ? 'dialogGauche' : 'dialogDroit');
+
+            resultModalEl.hidden = false;
+        }
+
+        function closeResultModal() {
+            resultModalEl.hidden = true;
+        }
+
         acceptBtn.addEventListener('click', () => {
             const item = gridItems[currentIndex];
-            if (item && item.lien) {
-                try {
-                    window.open(item.lien, '_blank');
-                } catch (e) {}
-            }
             closeModal();
+            openResultModal(item);
         });
 
         declineBtn.addEventListener('click', () => {
             closeModal();
+        });
+
+        // Fermeture de la modale résultat
+        closeResultBtn.addEventListener('click', () => {
+            closeResultModal();
+        });
+        // Clique en dehors (overlay) pour fermer la modale résultat
+        resultModalEl.addEventListener('click', (e) => {
+            if (e.target === resultModalEl) closeResultModal();
         });
 
         // Au clic sur "Jouer": spin pondéré sans décompte
